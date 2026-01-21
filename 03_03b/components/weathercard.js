@@ -1,15 +1,24 @@
+const tempTranslator = (temp) => {
+  const allTemps = {
+    kelvin: temp,
+    celsius: temp - 273,
+    fahrenheit: 1.8 * (temp - 273) + 32,
+  };
+  return allTemps;
+};
+
 const weatherCard = (data) => {
   return `
     <article class="weathercard">
           <div class="weathercard__meta">
             <div class="weathercard__meta-location">${data.name}, ${
-    data.sys.country
-  }</div>
+              data.sys.country
+            }</div>
           </div>
           <div class="weathercard__temp">
-            <span class="temp">${
-              data.main.temp
-            }</span><span class="tempunit">°C</span>
+            <span class="temp">${tempTranslator(data.main.temp).celsius.toFixed(
+              2,
+            )}</span><span class="tempunit">°C</span>
           </div>
           <div class="weathercard__wind">
             <div class="weathercard__wind-speed">
