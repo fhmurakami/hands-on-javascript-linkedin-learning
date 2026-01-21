@@ -13,7 +13,7 @@ const tempTranslator = (temp, unit) => {
       unit: "°F",
     },
   };
-  console.log(allTemps);
+  console.log(allTemps, unit);
   if (unit === "metric") {
     return allTemps.c;
   } else if (unit === "imperial") {
@@ -48,25 +48,25 @@ const weatherCard = (data, units) => {
     <article class="weathercard">
           <div class="weathercard__meta">
             <div class="weathercard__meta-location">${data.name}, ${
-    data.sys.country
-  }</div>
+              data.sys.country
+            }</div>
           </div>
           <div class="weathercard__temp">
             <span class="temp">${tempTranslator(
               data.main.temp,
-              units
+              units,
             ).value.toFixed(1)}</span><span class="tempunit">${
-    tempTranslator(data.main.temp, units).unit
-  }</span>
+              tempTranslator(data.main.temp, units).unit
+            }</span>
           </div>
           <div class="weathercard__wind">
             <div class="weathercard__wind-speed">
               <span class="speed">${speedTranslator(
                 data.wind.speed,
-                units
+                units,
               ).value.toFixed(1)}</span><span class="windunit">${
-    speedTranslator(data.wind.speed, units).unit
-  }</span>
+                speedTranslator(data.wind.speed, units).unit
+              }</span>
             </div>
             <div class="weathercard__wind-dir" style="transform:rotate(${
               data.wind.deg + 90
