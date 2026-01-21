@@ -38,7 +38,17 @@ async function displayData(location, units) {
   )
     .then((response) => response.json())
     .then(function (data) {
-      return data;
+      if (data.length === 0) {
+        errorMsg.classList.remove("hidden");
+        errorMsg.innerHTML = "No location by that name. Try again.";
+      } else {
+        return data;
+      }
+    })
+    .catch((error) => {
+      errorMsg.classList.remove("hidden");
+      errorMsg.innerHTML = "Something went wrong. Try again.";
+      console.error("Location query error: ", error);
     });
 
   if (currentLoc) {
@@ -54,6 +64,9 @@ async function displayData(location, units) {
       })
       .then(function () {
         unitChanger();
+      })
+      .catch((error) => {
+        console.error("Weather query error: ", error);
       });
   }
 }
